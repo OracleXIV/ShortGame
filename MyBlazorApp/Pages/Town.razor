@@ -1,4 +1,5 @@
 @page "/town"
+@inject NavigationManager NavigationManager
 
 <button @onclick="GoToWeaponShop">武器店</button>
 <button @onclick="GoToItemShop">道具店</button>
@@ -7,35 +8,28 @@
 <button @onclick="Logout">登出</button>
 
 @code {
-    private NavigationManager navigationManager;
-
-    public Town()
-    {
-        navigationManager = new NavigationManager();
-    }
-
     private void GoToWeaponShop()
     {
-        navigationManager.NavigateTo("/weaponshop");
+        NavigationManager.NavigateTo("/weaponshop");
     }
 
     private void GoToItemShop()
     {
-        navigationManager.NavigateTo("/itemshop");
+        NavigationManager.NavigateTo("/itemshop");
     }
 
     private void GoToHome()
     {
-        navigationManager.NavigateTo("/home");
+        NavigationManager.NavigateTo("/home");
     }
 
     private void GoToOutside()
     {
-        navigationManager.NavigateTo("/outside");
+        NavigationManager.NavigateTo("/outside");
     }
 
     private void Logout()
     {
-        navigationManager.NavigateTo("/login");
+        NavigationManager.NavigateTo("/login");
     }
 }

@@ -1,5 +1,7 @@
 @page "/itemshop"
 
+@inject NavigationManager NavigationManager
+
 <h1>道具商</h1>
 
 <ul>
@@ -7,9 +9,9 @@
     <li><a href="#" @onclick="BoostHealth">活力藥劑 (消耗 20 金幣)</a></li>
 </ul>
 
-<p>玩家金幣：@Player.Coins</p>
+<p>玩家金幣：@Player?.Coins</p> <!-- 使用 ?. 運算符以防止 Player 為 null 造成的異常 -->
 
-@if (errorMessage != null)
+@if (!string.IsNullOrEmpty(errorMessage))
 {
     <p>@errorMessage</p>
 }
@@ -18,21 +20,19 @@
 
 @code {
     [Inject]
-    private Player Player { get; set; }
+    private Player? Player { get; set; }
 
-    private string errorMessage;
-    [Inject]
-    private NavigationManager navigationManager { get; set; }
+    private string errorMessage = string.Empty; // 初始化 errorMessage 為空字符串
 
     private void RestoreHealth()
     {
-        if (Player.Coins >= 1)
+        if (Player?.Coins >= 1) // 使用 ?. 運算符以防止 Player 為 null 造成的異常
         {
             if (Player.Health < Player.MaxHealth)
             {
                 Player.Coins -= 1;
                 Player.Health += 1;
-                errorMessage = null; // 重置錯誤訊息
+                errorMessage = "成功"; // 重置錯誤訊息
             }
             else
             {
@@ -47,12 +47,12 @@
 
     private void BoostHealth()
     {
-        if (Player.Coins >= 20)
+        if (Player?.Coins >= 20) // 使用 ?. 運算符以防止 Player 為 null 造成的異常
         {
             Player.Coins -= 20;
             Player.MaxHealth += 1; // 增加體力上限
             Player.Health += 1; // 同時增加當前體力
-            errorMessage = null; // 重置錯誤訊息
+            errorMessage = "成功"; // 重置錯誤訊息
         }
         else
         {
@@ -62,6 +62,6 @@
 
     private void GoBack()
     {
-        navigationManager.NavigateTo("/town");
+        NavigationManager.NavigateTo("/town");
     }
 }

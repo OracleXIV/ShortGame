@@ -1,0 +1,12 @@
+@page "/"
+
+@inject NavigationManager NavigationManager
+
+<button @onclick="GoToTownPage">進入 Town 頁面</button>
+
+@code {
+    private void GoToTownPage()
+    {
+        NavigationManager.NavigateTo("/Town");
+    }
+}

@@ -10,10 +10,9 @@
 </div>
 
 <div class="main">
-    @Body
+    @Body <!-- 這裡顯示主內容區域 -->
 </div>
 
 @code {
-    [Inject]
-    private Player Player { get; set; }
+    private Player Player = new Player(); // 初始化 Player 字段
 }

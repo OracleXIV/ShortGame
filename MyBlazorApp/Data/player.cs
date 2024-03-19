@@ -1,7 +1,7 @@
 public class Player
 {
-    public string AccountId { get; set; } // 帳號ID屬性
-    public string UserName { get; set; }
+    public int AccountId { get; set; } = 123;// 帳號ID屬性
+    public int UserName { get; set; } = 456;
     public int Health { get; set; } = 10;
     public int MaxHealth { get; set; } = 10;
     public int Coins { get; set; } = 100;
