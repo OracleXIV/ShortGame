@@ -1,0 +1,25 @@
+@page "/login"
+
+<h1>登入</h1>
+
+<form>
+    <div>
+        <label for="username">帳號：</label>
+        <input type="text" id="username" @bind="Username" />
+    </div>
+    <div>
+        <label for="password">密碼：</label>
+        <input type="password" id="password" @bind="Password" />
+    </div>
+    <button type="submit" @onclick="Login">登入</button>
+</form>
+
+@code {
+    private string Username { get; set; }
+    private string Password { get; set; }
+
+    private void Login()
+    {
+        // 在這裡添加登入邏輯，比如檢查帳號密碼是否有效
+    }
+}

@@ -1,0 +1,41 @@
+@page "/town"
+
+<button @onclick="GoToWeaponShop">武器店</button>
+<button @onclick="GoToItemShop">道具店</button>
+<button @onclick="GoToHome">回家</button>
+<button @onclick="GoToOutside">出城</button>
+<button @onclick="Logout">登出</button>
+
+@code {
+    private NavigationManager navigationManager;
+
+    public Town()
+    {
+        navigationManager = new NavigationManager();
+    }
+
+    private void GoToWeaponShop()
+    {
+        navigationManager.NavigateTo("/weaponshop");
+    }
+
+    private void GoToItemShop()
+    {
+        navigationManager.NavigateTo("/itemshop");
+    }
+
+    private void GoToHome()
+    {
+        navigationManager.NavigateTo("/home");
+    }
+
+    private void GoToOutside()
+    {
+        navigationManager.NavigateTo("/outside");
+    }
+
+    private void Logout()
+    {
+        navigationManager.NavigateTo("/login");
+    }
+}

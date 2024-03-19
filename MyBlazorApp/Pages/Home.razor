@@ -1,0 +1,69 @@
+@page "/home"
+
+<button @onclick="Save">存檔</button>
+<button @onclick="Load">讀檔</button>
+<button @onclick="ReturnToTown">返回城鎮</button>
+
+@if (showSaveConfirmation)
+{
+    <div class="modal">
+        <div class="modal-content">
+            <p>是否覆蓋當前紀錄？</p>
+            <button @onclick="ConfirmSave">是</button>
+            <button @onclick="CancelSave">否</button>
+        </div>
+    </div>
+}
+
+@if (showLoadConfirmation)
+{
+    <div class="modal">
+        <div class="modal-content">
+            <p>是否使用最後一次伺服器端資料覆蓋當前紀錄？</p>
+            <button @onclick="ConfirmLoad">是</button>
+            <button @onclick="CancelLoad">否</button>
+        </div>
+    </div>
+}
+
+@code {
+    private bool showSaveConfirmation = false;
+    private bool showLoadConfirmation = false;
+
+    private void Save()
+    {
+        showSaveConfirmation = true;
+    }
+
+    private void ConfirmSave()
+    {
+        // 執行儲存
+        showSaveConfirmation = false;
+    }
+
+    private void CancelSave()
+    {
+        showSaveConfirmation = false;
+    }
+
+    private void Load()
+    {
+        showLoadConfirmation = true;
+    }
+
+    private void ConfirmLoad()
+    {
+        // 執行讀取
+        showLoadConfirmation = false;
+    }
+
+    private void CancelLoad()
+    {
+        showLoadConfirmation = false;
+    }
+
+    private void ReturnToTown()
+    {
+        navigationManager.NavigateTo("/town"); // 返回城鎮
+    }
+}

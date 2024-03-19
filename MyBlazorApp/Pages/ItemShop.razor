@@ -1,0 +1,67 @@
+@page "/itemshop"
+
+<h1>道具商</h1>
+
+<ul>
+    <li><a href="#" @onclick="RestoreHealth">恢復藥劑 (消耗 1 金幣)</a></li>
+    <li><a href="#" @onclick="BoostHealth">活力藥劑 (消耗 20 金幣)</a></li>
+</ul>
+
+<p>玩家金幣：@Player.Coins</p>
+
+@if (errorMessage != null)
+{
+    <p>@errorMessage</p>
+}
+
+<button @onclick="GoBack">離開道具商店返回城鎮</button>
+
+@code {
+    [Inject]
+    private Player Player { get; set; }
+
+    private string errorMessage;
+    [Inject]
+    private NavigationManager navigationManager { get; set; }
+
+    private void RestoreHealth()
+    {
+        if (Player.Coins >= 1)
+        {
+            if (Player.Health < Player.MaxHealth)
+            {
+                Player.Coins -= 1;
+                Player.Health += 1;
+                errorMessage = null; // 重置錯誤訊息
+            }
+            else
+            {
+                errorMessage = "您的體力已達到上限，無法購買恢復藥劑";
+            }
+        }
+        else
+        {
+            errorMessage = "金幣不足";
+        }
+    }
+
+    private void BoostHealth()
+    {
+        if (Player.Coins >= 20)
+        {
+            Player.Coins -= 20;
+            Player.MaxHealth += 1; // 增加體力上限
+            Player.Health += 1; // 同時增加當前體力
+            errorMessage = null; // 重置錯誤訊息
+        }
+        else
+        {
+            errorMessage = "金幣不足";
+        }
+    }
+
+    private void GoBack()
+    {
+        navigationManager.NavigateTo("/town");
+    }
+}

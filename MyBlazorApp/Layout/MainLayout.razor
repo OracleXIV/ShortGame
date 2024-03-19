@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<div class="sidebar">
+    <!-- 這裡放置側邊欄內容 -->
+    <p>玩家帳號：@Player.UserName</p>
+    <p>體力：@Player.Health / @Player.MaxHealth</p>
+    <p>金幣：@Player.Coins</p>
+    <p>攻擊力：@Player.Attack</p>
+    <p>防禦力：@Player.Defense</p>
+</div>
+
+<div class="main">
+    @Body
+</div>
+
+@code {
+    [Inject]
+    private Player Player { get; set; }
+}
